@@ -1,6 +1,9 @@
 package domain;
 import java.io.File;
+<<<<<<< HEAD
 import java.io.Serializable;
+=======
+>>>>>>> 08ef52b (Controlador completado)
 import java.awt.Color;
 import java.io.*;
 
@@ -119,6 +122,7 @@ public class Valley implements Serializable {
         }
     }
     
+<<<<<<< HEAD
     public void abrir(File file) throws ValleyException{
         throw new ValleyException(ValleyException.OPCION_ABRIR_EN_CONSTRUCCION);
    }
@@ -158,12 +162,23 @@ public class Valley implements Serializable {
     }
 
     public void exportar00(File file) throws ValleyException {
+=======
+    public void abrir(File selectedFile) throws ValleyException{
+        throw new ValleyException(ValleyException.OPCION_ABRIR_EN_CONSTRUCCION);
+   }
+
+    public static void importar(File file) throws ValleyException{
+        throw new ValleyException(ValleyException.OPCION_IMPORTAR_EN_CONSTRUCCION);
+   }
+    public void exportar(File selectedFile) throws ValleyException{
+>>>>>>> 08ef52b (Controlador completado)
         throw new ValleyException(ValleyException.OPCION_EXPORTAR_EN_CONSTRUCCION);
 <<<<<<< HEAD
     }
 
 =======
    }
+<<<<<<< HEAD
    public void nuevo() throws ValleyException{
         try {
             throw new ValleyException(ValleyException.OPCION_NUEVO_EN_CONSTRUCCION);
@@ -172,6 +187,17 @@ public class Valley implements Serializable {
         }
     }
 >>>>>>> 491cf12 (new, save and import)
+=======
+
+    public void nuevo() throws ValleyException{
+        throw new ValleyException(ValleyException.OPCION_NUEVO_EN_CONSTRUCCION);
+    }
+
+    public void guardar(File file) throws ValleyException{
+        throw new ValleyException(ValleyException.OPCION_GUARDAR_EN_CONSTRUCCION);
+
+    }
+>>>>>>> 08ef52b (Controlador completado)
 }
 
 

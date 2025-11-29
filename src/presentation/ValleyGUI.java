@@ -44,7 +44,7 @@ public class ValleyGUI extends JFrame implements Serializable{
         menuBar.add(menu);
         setJMenuBar(menuBar);
     }
-    private ValleyGUI() {
+    public ValleyGUI() {
         theValley=new Valley();
         SIZE=theValley.getSize();
         prepareElements();
@@ -70,8 +70,7 @@ public class ValleyGUI extends JFrame implements Serializable{
         setDefaultCloseOperation(EXIT_ON_CLOSE);       
         ticTacButton.addActionListener(
             new ActionListener(){
-                public void actionPerformed(ActionEvent e) {
-                    ticTacButtonAction();
+                public void actionPerformed(ActionEvent e) {ticTacButtonAction();
                 }
             });
         prepareActionsMenu();
@@ -81,7 +80,11 @@ public class ValleyGUI extends JFrame implements Serializable{
         menuNuevo.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
                 theValley = new Valley();
-                optionNew();
+                try {
+                    optionNew();
+                } catch (ValleyException ex) {
+                   // throw new RuntimeException(ex);
+                }
             }
         });
         
@@ -94,6 +97,7 @@ public class ValleyGUI extends JFrame implements Serializable{
         menuGuardar.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
                 optionSave();
+                System.out.println("SE PRESIONÓ MENU GUARDAR");
             }
         });
 
@@ -154,40 +158,30 @@ public class ValleyGUI extends JFrame implements Serializable{
         System.exit(0);
     }
 
-    private void optionNew() {
-        try {
-                int confirm = JOptionPane.showConfirmDialog(
-                        this,
-                        "¿Está seguro de crear un nuevo valle?\nSe perderá la simulación actual.",
-                        "Nuevo Valle",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE
-                );
+    private void optionNew() throws ValleyException{
+        int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "¿Está seguro de crear un nuevo valle?\nSe perderá la simulación actual.",
+                "Nuevo Valle",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+        );
 
-                if (confirm != JOptionPane.YES_OPTION) {
-                    return;
-                }
-
-            theValley.nuevo();
-
-            // Actualizar visualización
-            photo.repaint();
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Nuevo valle creado exitosamente",
-                    "Nuevo Valle",
-                    JOptionPane.INFORMATION_MESSAGE
-            );
-
-        } catch (ValleyException e) {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Error al crear nuevo valle:\n" + e.getMessage(),
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE
-            );
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
         }
+
+        theValley.nuevo();
+
+        // Actualizar visualización
+        photo.repaint();
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Nuevo valle creado exitosamente",
+                "Nuevo Valle",
+                JOptionPane.INFORMATION_MESSAGE
+        );
     }
 
     private void optionSave(){
@@ -203,7 +197,6 @@ public class ValleyGUI extends JFrame implements Serializable{
             try {
                 File file = fileChooser.getSelectedFile();
 
-                // Asegurar extensión .valley
                 if (!file.getName().toLowerCase().endsWith(".valley")) {
                     file = new File(file.getAbsolutePath() + ".valley");
                 }
@@ -216,8 +209,8 @@ public class ValleyGUI extends JFrame implements Serializable{
                         "Guardado exitoso",
                         JOptionPane.INFORMATION_MESSAGE
                 );
-
-            } catch (ValleyException e) {
+            }
+            catch (ValleyException e) {
                 JOptionPane.showMessageDialog(
                         this,
                         "Error al guardar el valle:\n" + e.getMessage(),
@@ -263,7 +256,6 @@ public class ValleyGUI extends JFrame implements Serializable{
                 );
             }
         }
->>>>>>> 491cf12 (new, save and import)
     }
 
     private void ticTacButtonAction() {
