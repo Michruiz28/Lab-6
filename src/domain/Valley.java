@@ -1,5 +1,6 @@
 package domain;
-import java.util.*;
+import java.io.File;
+import java.io.Serializable;
 import java.awt.Color;
 import java.io.*;
 
@@ -8,7 +9,7 @@ import java.io.*;
  * Es una cuadricula bidimencional de un tamaño fijo donde habitan animales y recursos
  * La cuadricula es de 25x25 celdas
  */
-public class Valley{
+public class Valley implements Serializable {
     static private int SIZE=25;
     private Unit[][] places;
     private Color lastHayColor;
@@ -121,10 +122,17 @@ public class Valley{
     public void abrir(File file) throws ValleyException{
         throw new ValleyException(ValleyException.OPCION_ABRIR_EN_CONSTRUCCION);
    }
+<<<<<<< HEAD
     public void salvar(File file) throws ValleyException{
         throw new ValleyException(ValleyException.OPCION_GUARDAR_EN_CONSTRUCCION);
    }
     public void importar(File file) throws ValleyException{
+=======
+    public void guardar(File archivo) throws ValleyException{
+        throw new ValleyException(ValleyException.OPCION_GUARDAR_EN_CONSTRUCCION);
+   }
+    public static void importar(File archivo) throws ValleyException{
+>>>>>>> 491cf12 (new, save and import)
         throw new ValleyException(ValleyException.OPCION_IMPORTAR_EN_CONSTRUCCION);
    }
     public void exportar(File file) throws ValleyException{
@@ -151,6 +159,21 @@ public class Valley{
 
     public void exportar00(File file) throws ValleyException {
         throw new ValleyException(ValleyException.OPCION_EXPORTAR_EN_CONSTRUCCION);
+<<<<<<< HEAD
     }
 
+=======
+   }
+   public void nuevo() throws ValleyException{
+        try {
+            throw new ValleyException(ValleyException.OPCION_NUEVO_EN_CONSTRUCCION);
+        } catch (ValleyException e) {
+            throw new RuntimeException(e);
+        }
+    }
+>>>>>>> 491cf12 (new, save and import)
 }
+
+
+
+
