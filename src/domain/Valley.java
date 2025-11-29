@@ -1,5 +1,5 @@
 package domain;
-import java.util.*;
+import java.io.File;
 import java.awt.Color;
 
 /**
@@ -117,16 +117,23 @@ public class Valley{
         }
     }
     
-    public void abrir() throws ValleyException{
+    public void abrir(File selectedFile) throws ValleyException{
         throw new ValleyException(ValleyException.OPCION_ABRIR_EN_CONSTRUCCION);
    }
-    public void salvar() throws ValleyException{
-        throw new ValleyException(ValleyException.OPCION_GUARDAR_EN_CONSTRUCCION);
-   }
-    public void importar() throws ValleyException{
+
+    public static void importar(File file) throws ValleyException{
         throw new ValleyException(ValleyException.OPCION_IMPORTAR_EN_CONSTRUCCION);
    }
-    public void exportar() throws ValleyException{
+    public void exportar(File selectedFile) throws ValleyException{
         throw new ValleyException(ValleyException.OPCION_EXPORTAR_EN_CONSTRUCCION);
    }
+
+    public void nuevo() throws ValleyException{
+        throw new ValleyException(ValleyException.OPCION_NUEVO_EN_CONSTRUCCION);
+    }
+
+    public void guardar(File file) throws ValleyException{
+        throw new ValleyException(ValleyException.OPCION_GUARDAR_EN_CONSTRUCCION);
+
+    }
 }
