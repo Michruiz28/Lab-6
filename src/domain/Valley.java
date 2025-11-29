@@ -166,10 +166,13 @@ public class Valley implements Serializable {
     public void abrir(File selectedFile) throws ValleyException{
         throw new ValleyException(ValleyException.OPCION_ABRIR_EN_CONSTRUCCION);
    }
-
-    public static void importar(File file) throws ValleyException{
+    public void salvar(File file) throws ValleyException{
+        throw new ValleyException(ValleyException.OPCION_GUARDAR_EN_CONSTRUCCION);
+   }
+    public void importar(File file) throws ValleyException{
         throw new ValleyException(ValleyException.OPCION_IMPORTAR_EN_CONSTRUCCION);
    }
+<<<<<<< HEAD
     public void exportar(File selectedFile) throws ValleyException{
 >>>>>>> 08ef52b (Controlador completado)
         throw new ValleyException(ValleyException.OPCION_EXPORTAR_EN_CONSTRUCCION);
@@ -189,8 +192,32 @@ public class Valley implements Serializable {
 >>>>>>> 491cf12 (new, save and import)
 =======
 
+=======
+    public void exportar(File file) throws ValleyException{
+        try (PrintWriter writer = new PrintWriter (new FileWriter (file))){
+            for ( int r = 0; r < SIZE; r++){
+                for ( int c = 0; c<SIZE ; c++){
+                    Unit unidad = places [r][c];
+                    if(unidad != null){
+                        String tipo = unidad.getTipoExportacion();
+                        writer.println(tipo + "," + r + "," + c);
+                    }
+                }
+            }
+        } catch (IOException e ){
+            throw new ValleyException("Errpr al exportar : " + e.getMessage());
+        }
+    }
+>>>>>>> 7a6c2b5 (Exportar terminado)
     public void nuevo() throws ValleyException{
         throw new ValleyException(ValleyException.OPCION_NUEVO_EN_CONSTRUCCION);
+    }
+    public void importar00(File file) throws ValleyException {
+        throw new ValleyException(ValleyException.OPCION_IMPORTAR_EN_CONSTRUCCION);
+    }
+
+    public void exportar00(File file) throws ValleyException {
+        throw new ValleyException(ValleyException.OPCION_EXPORTAR_EN_CONSTRUCCION);
     }
 
     public void guardar(File file) throws ValleyException{
