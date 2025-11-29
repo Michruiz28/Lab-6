@@ -1,9 +1,13 @@
 package domain;
+<<<<<<< HEAD
 import java.io.File;
 <<<<<<< HEAD
 import java.io.Serializable;
 =======
 >>>>>>> 08ef52b (Controlador completado)
+=======
+import java.io.*;
+>>>>>>> 7f67065 (Guardar ready)
 import java.awt.Color;
 import java.io.*;
 
@@ -12,7 +16,11 @@ import java.io.*;
  * Es una cuadricula bidimencional de un tamaño fijo donde habitan animales y recursos
  * La cuadricula es de 25x25 celdas
  */
+<<<<<<< HEAD
 public class Valley implements Serializable {
+=======
+public class Valley implements Serializable{
+>>>>>>> 7f67065 (Guardar ready)
     static private int SIZE=25;
     private Unit[][] places;
     private Color lastHayColor;
@@ -166,6 +174,7 @@ public class Valley implements Serializable {
     public void abrir(File selectedFile) throws ValleyException{
         throw new ValleyException(ValleyException.OPCION_ABRIR_EN_CONSTRUCCION);
    }
+<<<<<<< HEAD
     public void salvar(File file) throws ValleyException{
         throw new ValleyException(ValleyException.OPCION_GUARDAR_EN_CONSTRUCCION);
    }
@@ -173,6 +182,12 @@ public class Valley implements Serializable {
         throw new ValleyException(ValleyException.OPCION_IMPORTAR_EN_CONSTRUCCION);
    }
 <<<<<<< HEAD
+=======
+
+    public static void importar00(File file) throws ValleyException {
+        throw new ValleyException(ValleyException.OPCION_IMPORTAR_EN_CONSTRUCCION);
+    }
+>>>>>>> 7f67065 (Guardar ready)
     public void exportar(File selectedFile) throws ValleyException{
 >>>>>>> 08ef52b (Controlador completado)
         throw new ValleyException(ValleyException.OPCION_EXPORTAR_EN_CONSTRUCCION);
@@ -220,9 +235,17 @@ public class Valley implements Serializable {
         throw new ValleyException(ValleyException.OPCION_EXPORTAR_EN_CONSTRUCCION);
     }
 
-    public void guardar(File file) throws ValleyException{
-        throw new ValleyException(ValleyException.OPCION_GUARDAR_EN_CONSTRUCCION);
+    public void guardar00(File file) throws ValleyException {
+        try (FileOutputStream fileOut = new FileOutputStream(file);
+             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
 
+            out.writeObject(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            if (e.getCause() != null) e.getCause().printStackTrace();
+            throw new ValleyException("Error al guardar la partida: " + e.toString());
+        }
     }
 >>>>>>> 08ef52b (Controlador completado)
 }

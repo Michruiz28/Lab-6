@@ -1,11 +1,12 @@
 package domain;
 import java.awt.Color;
+import java.io.Serializable;
 
 /**Information about a Mammal<br>
 <b>(valley,row,column,color)</b><br>
 <br>
  */
-public abstract class Mammal extends Animal implements Unit{
+public abstract class Mammal extends Animal implements Unit, Serializable {
     private Valley valley;
     
     protected int row,column;    

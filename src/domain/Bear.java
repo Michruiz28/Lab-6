@@ -1,11 +1,13 @@
 package domain;
 import java.awt.Color;
+import java.io.Serializable;
+
 /**
  * Representa un oso en el valle
  * Los osos son territoriales, se mueven lentamente hacia el sur.
  * Ganan energía con osos vecinos y pierden energía con lobos vecinos (pelean)
  */
-public class Bear extends Mammal{
+public class Bear extends Mammal implements Serializable {
     private int turnosSinMoverse;
     private static final Color BROWN = new Color(139, 69, 19);
     

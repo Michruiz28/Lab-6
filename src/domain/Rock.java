@@ -1,5 +1,6 @@
 package domain;
 import java.awt.Color;
+import java.io.Serializable;
 
 /**
  * Esta clase roca representa una roca en el valle
@@ -8,7 +9,7 @@ import java.awt.Color;
  *    - Bloquean el paso de los animales
  *    - Son recursos no consumibles
  */
-public class Rock implements Unit {
+public class Rock implements Unit, Serializable {
     private static final Color ROCK_COLOR = new Color(100, 100, 100);
     private int row;
     private int column;

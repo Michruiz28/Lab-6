@@ -1,8 +1,9 @@
 package domain;
 import java.awt.Color;
+import java.io.Serializable;
 
 
-public abstract class Animal{
+public abstract class Animal implements Serializable {
     
     private int days;
     private int energy;
