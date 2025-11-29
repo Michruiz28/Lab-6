@@ -6,7 +6,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 
-public class ValleyGUI extends JFrame implements Serializable{
+import static domain.Valley.*;
+
+public class ValleyGUI extends JFrame{
     public static final int SIDE=20;
 
     public final int SIZE;
@@ -50,7 +52,7 @@ public class ValleyGUI extends JFrame implements Serializable{
         prepareElements();
         prepareActions();
     }
-    
+
     private void prepareElements() {
         setTitle("Schelling Valley");
         prepareElementsMenu();
@@ -60,14 +62,14 @@ public class ValleyGUI extends JFrame implements Serializable{
         add(photo,BorderLayout.CENTER);
         add(ticTacButton,BorderLayout.SOUTH);
         pack();
-        setSize(new Dimension(SIDE*SIZE+15,SIDE*SIZE+100)); 
+        setSize(new Dimension(SIDE*SIZE+15,SIDE*SIZE+100));
                 setLocationRelativeTo(null);
         setResizable(false);
         photo.repaint();
     }
 
     private void prepareActions(){
-        setDefaultCloseOperation(EXIT_ON_CLOSE);       
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         ticTacButton.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e) {ticTacButtonAction();
@@ -87,7 +89,7 @@ public class ValleyGUI extends JFrame implements Serializable{
                 }
             }
         });
-        
+
         menuAbrir.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
                 optionOpen();
@@ -183,9 +185,10 @@ public class ValleyGUI extends JFrame implements Serializable{
 
     private void optionSave(){
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home"), "Documents"));
         fileChooser.setDialogTitle("Guardar Valle");
         fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(
-                "Archivos Valley (*.valley)", "valley"
+                "Archivos de Datos (*.dat)", "dat"
         ));
 
         int result = fileChooser.showSaveDialog(this);
@@ -194,11 +197,12 @@ public class ValleyGUI extends JFrame implements Serializable{
             try {
                 File file = fileChooser.getSelectedFile();
 
-                if (!file.getName().toLowerCase().endsWith(".valley")) {
-                    file = new File(file.getAbsolutePath() + ".valley");
+                if (!file.getName().toLowerCase().endsWith(".dat")) {
+                    file = new File(file.getAbsolutePath() + ".dat");
+                    System.out.println("Archivo con extensión: " + file.getAbsolutePath());
                 }
 
-                theValley.guardar(file);
+                theValley.guardar00(file);
 
                 JOptionPane.showMessageDialog(
                         this,
@@ -206,8 +210,9 @@ public class ValleyGUI extends JFrame implements Serializable{
                         "Guardado exitoso",
                         JOptionPane.INFORMATION_MESSAGE
                 );
-            }
-            catch (ValleyException e) {
+            } catch (ValleyException e) {
+                e.printStackTrace();
+                System.out.println("EXCEPCIÓN: " + e.getMessage());
                 JOptionPane.showMessageDialog(
                         this,
                         "Error al guardar el valle:\n" + e.getMessage(),
@@ -232,7 +237,7 @@ public class ValleyGUI extends JFrame implements Serializable{
                 File file = fileChooser.getSelectedFile();
 
                 // Importar el valle desde el archivo
-                Valley.importar(file);
+                Valley.importar00(file);
 
                 // Actualizar visualización
                 photo.repaint();
@@ -263,11 +268,11 @@ public class ValleyGUI extends JFrame implements Serializable{
     public Valley getTheValley(){
         return theValley;
     }
-    
+
     public static void main(String[] args) {
         ValleyGUI cg=new ValleyGUI();
         cg.setVisible(true);
-    }  
+    }
 }
 
 class PhotoValley extends JPanel{
@@ -276,25 +281,25 @@ class PhotoValley extends JPanel{
     public PhotoValley(ValleyGUI gui) {
         this.gui=gui;
         setBackground(Color.white);
-        setPreferredSize(new Dimension(gui.SIDE*gui.SIZE+10, gui.SIDE*gui.SIZE+10));         
+        setPreferredSize(new Dimension(gui.SIDE*gui.SIZE+10, gui.SIDE*gui.SIZE+10));
     }
 
     public void paintComponent(Graphics g){
         Valley theValley=gui.getTheValley();
         super.paintComponent(g);
-         
+
         for (int c=0;c<=theValley.getSize();c++){
             g.drawLine(c*gui.SIDE,0,c*gui.SIDE,theValley.getSize()*gui.SIDE);
         }
         for (int f=0;f<=theValley.getSize();f++){
             g.drawLine(0,f*gui.SIDE,theValley.getSize()*gui.SIDE,f*gui.SIDE);
-        }       
+        }
         for (int f=0;f<theValley.getSize();f++){
             for(int c=0;c<theValley.getSize();c++){
                 if (theValley.getUnit(f,c)!=null){
                     g.setColor(theValley.getUnit(f,c).getColor());
-                    if (theValley.getUnit(f,c).shape()==Unit.SQUARE){                  
-                        g.fillRoundRect(gui.SIDE*c+1,gui.SIDE*f+1,gui.SIDE-2,gui.SIDE-2,2,2);   
+                    if (theValley.getUnit(f,c).shape()==Unit.SQUARE){
+                        g.fillRoundRect(gui.SIDE*c+1,gui.SIDE*f+1,gui.SIDE-2,gui.SIDE-2,2,2);
                     }else {
                         g.fillOval(gui.SIDE*c+1,gui.SIDE*f+1,gui.SIDE-2,gui.SIDE-2);
                     }
@@ -305,7 +310,7 @@ class PhotoValley extends JPanel{
                         } else {
                             g.drawString("~",gui.SIDE*c+6,gui.SIDE*f+17);
                         }
-                    }    
+                    }
                 }
             }
         }

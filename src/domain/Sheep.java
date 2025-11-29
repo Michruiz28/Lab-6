@@ -1,5 +1,7 @@
 package domain;
 import java.awt.Color;
+import java.io.Serializable;
+
 /**
  * La clase oveja representa al animal en la simulacion
  * Este animal es una presa que se caracteriza por:
@@ -8,7 +10,7 @@ import java.awt.Color;
  *     -Muere instantaneamente al detectar un lobo vecino
  *     -Consume energia con cada movimiento
  */
-public class Sheep extends Mammal {
+public class Sheep extends Mammal implements Serializable {
     private boolean movingNorth;
     private static final Color SHEEP_COLOR = new Color(200, 200, 200);
     

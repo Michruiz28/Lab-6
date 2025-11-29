@@ -1,5 +1,5 @@
 package domain;
-import java.io.File;
+import java.io.*;
 import java.awt.Color;
 
 /**
@@ -7,7 +7,7 @@ import java.awt.Color;
  * Es una cuadricula bidimencional de un tamaño fijo donde habitan animales y recursos
  * La cuadricula es de 25x25 celdas
  */
-public class Valley{
+public class Valley implements Serializable{
     static private int SIZE=25;
     private Unit[][] places;
     private Color lastHayColor;
@@ -121,9 +121,9 @@ public class Valley{
         throw new ValleyException(ValleyException.OPCION_ABRIR_EN_CONSTRUCCION);
    }
 
-    public static void importar(File file) throws ValleyException{
+    public static void importar00(File file) throws ValleyException {
         throw new ValleyException(ValleyException.OPCION_IMPORTAR_EN_CONSTRUCCION);
-   }
+    }
     public void exportar(File selectedFile) throws ValleyException{
         throw new ValleyException(ValleyException.OPCION_EXPORTAR_EN_CONSTRUCCION);
    }
@@ -132,8 +132,20 @@ public class Valley{
         throw new ValleyException(ValleyException.OPCION_NUEVO_EN_CONSTRUCCION);
     }
 
-    public void guardar(File file) throws ValleyException{
-        throw new ValleyException(ValleyException.OPCION_GUARDAR_EN_CONSTRUCCION);
+    public void guardar00(File file) throws ValleyException {
+        try (FileOutputStream fileOut = new FileOutputStream(file);
+             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
 
+            out.writeObject(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            if (e.getCause() != null) e.getCause().printStackTrace();
+            throw new ValleyException("Error al guardar la partida: " + e.toString());
+        }
     }
 }
+
+
+
+

@@ -1,8 +1,9 @@
 
 package domain;
 import java.awt.Color;
+import java.io.Serializable;
 
-public class Wolf extends Mammal{
+public class Wolf extends Mammal implements Serializable {
     
     public Wolf(Valley valley,int row, int column){
         super(valley,row, column);

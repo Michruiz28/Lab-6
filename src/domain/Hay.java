@@ -1,5 +1,6 @@
 package domain;
 import java.awt.Color;
+import java.io.Serializable;
 
 /**
  * Se define la clase Heno.
@@ -7,7 +8,7 @@ import java.awt.Color;
  * @author Michelle Dayana Carranza Ruíz y Maria Katalina Leyva Diaz 
  * @version 18.10.2025
  */
-public class Hay implements Unit{
+public class Hay implements Unit, Serializable{
     private Valley valley;
     private int row, column;
     private Color color;
