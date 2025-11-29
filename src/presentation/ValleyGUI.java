@@ -74,7 +74,46 @@ public class ValleyGUI extends JFrame{
                     ticTacButtonAction();
                 }
             });
+        prepareActionsMenu();
 
+    }
+    private void prepareActionsMenu(){
+        menuNuevo.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                theValley=new Valley();
+                optionNew();
+            }
+        });
+        
+        menuAbrir.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                optionOpen();
+            }
+        });
+
+        menuGuardar.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                optionSave();
+            }
+        });
+
+        menuImportar.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                optionImport();
+            }
+        });
+
+        menuExportar.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                optionExport();
+            }
+        });
+
+        menuSalir.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
     }
 
     private void ticTacButtonAction() {
