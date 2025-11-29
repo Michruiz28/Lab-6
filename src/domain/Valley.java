@@ -1,7 +1,6 @@
 package domain;
 import java.util.*;
 import java.awt.Color;
-import java.io.*;
 
 /**
  * La clase valle representa el valle donde ocurre la simulacion
@@ -118,7 +117,7 @@ public class Valley{
         }
     }
     
-    public void abrir(File file) throws ValleyException{
+    public void abrir() throws ValleyException{
         throw new ValleyException(ValleyException.OPCION_ABRIR_EN_CONSTRUCCION);
    }
     public void salvar() throws ValleyException{
@@ -127,11 +126,7 @@ public class Valley{
     public void importar() throws ValleyException{
         throw new ValleyException(ValleyException.OPCION_IMPORTAR_EN_CONSTRUCCION);
    }
-    public void exportar(File file) throws ValleyException{
+    public void exportar() throws ValleyException{
         throw new ValleyException(ValleyException.OPCION_EXPORTAR_EN_CONSTRUCCION);
    }
-    public void nuevo() throws ValleyException{
-        throw new ValleyException(ValleyException.OPCION_NUEVO_EN_CONSTRUCCION);
-    }
-
 }
