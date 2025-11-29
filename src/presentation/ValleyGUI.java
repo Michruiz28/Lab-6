@@ -80,7 +80,7 @@ public class ValleyGUI extends JFrame{
     private void prepareActionsMenu(){
         menuNuevo.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
-                theValley=new Valley();
+                theValley = new Valley();
                 optionNew();
             }
         });
@@ -111,9 +111,51 @@ public class ValleyGUI extends JFrame{
 
         menuSalir.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                optionExit();
             }
         });
+    }
+
+    private void optionOpen(){
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Abrir Valley");
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            try {
+                theValley.abrir(selectedFile);
+            } catch (ValleyException e){
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void optionExport(){
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Exportar Valley");
+        int result = fileChooser.showSaveDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            try{
+                theValley.exportar(selectedFile);
+            } catch(ValleyException e ){
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void optionExit(){
+        int response = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea salir?", "Confirmar salida", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }
+
+    private void optionNew(){
+    }
+    private void optionImport(){
+    }
+    private void optionSave(){
     }
 
     private void ticTacButtonAction() {
