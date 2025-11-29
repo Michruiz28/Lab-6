@@ -22,4 +22,9 @@ public class Wolf extends Mammal{
            }    
         }
     }
+
+    @Override
+    public String getTipoExportacion(){
+        return "Wolf";
+    }
 }

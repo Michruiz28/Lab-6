@@ -97,4 +97,9 @@ public class Sheep extends Mammal {
     public boolean isMovingNorth() {
         return movingNorth;
     }
+    @Override
+    public String getTipoExportacion(){
+        return "Sheep";
+    }
+
 }

@@ -136,23 +136,26 @@ public class ValleyGUI extends JFrame implements Serializable{
 
     private void optionExport(){
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos texto (*.txt)","txt"));
         fileChooser.setDialogTitle("Exportar Valley");
         int result = fileChooser.showSaveDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
+        if (result == JFileChooser.APPROVE_OPTION){
             File selectedFile = fileChooser.getSelectedFile();
-            try{
+            if ( !selectedFile.getName().toLowerCase().endsWith(".txt")){
+                selectedFile = new File(selectedFile.getAbsolutePath() + ".txt");
+            }
+            try {
                 theValley.exportar(selectedFile);
-            } catch(ValleyException e ){
-                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Valley exportado","Exportar",JOptionPane.INFORMATION_MESSAGE);
+            } catch (ValleyException e){
+                JOptionPane.showMessageDialog(this, e.getMessage(),"Error al exportat",JOptionPane.ERROR_MESSAGE);
             }
         }
+   
     }
 
     private void optionExit(){
-        int response = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea salir?", "Confirmar salida", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-        if (response == JOptionPane.YES_OPTION) {
-            System.exit(0);
-        }
+        System.exit(0);
     }
 
     private void optionNew() throws ValleyException{
