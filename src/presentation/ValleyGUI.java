@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 
-public class ValleyGUI extends JFrame{  
+public class ValleyGUI extends JFrame implements Serializable{
     public static final int SIDE=20;
 
     public final int SIZE;
@@ -116,6 +116,117 @@ public class ValleyGUI extends JFrame{
         });
     }
 
+    private void optionNew() {
+        try {
+                int confirm = JOptionPane.showConfirmDialog(
+                        this,
+                        "¿Está seguro de crear un nuevo valle?\nSe perderá la simulación actual.",
+                        "Nuevo Valle",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE
+                );
+
+                if (confirm != JOptionPane.YES_OPTION) {
+                    return;
+                }
+
+            theValley.nuevo();
+
+            // Actualizar visualización
+            photo.repaint();
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Nuevo valle creado exitosamente",
+                    "Nuevo Valle",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+
+        } catch (ValleyException e) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Error al crear nuevo valle:\n" + e.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+
+    private void optionSave(){
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Guardar Valle");
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(
+                "Archivos Valley (*.valley)", "valley"
+        ));
+
+        int result = fileChooser.showSaveDialog(this);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            try {
+                File file = fileChooser.getSelectedFile();
+
+                // Asegurar extensión .valley
+                if (!file.getName().toLowerCase().endsWith(".valley")) {
+                    file = new File(file.getAbsolutePath() + ".valley");
+                }
+
+                theValley.guardar(file);
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "El valle se ha guardado correctamente.",
+                        "Guardado exitoso",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+
+            } catch (ValleyException e) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Error al guardar el valle:\n" + e.getMessage(),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
+        }
+    }
+
+    private void optionImport(){
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Importar Valle");
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(
+                "Archivos de texto (*.txt)", "txt"
+        ));
+
+        int result = fileChooser.showOpenDialog(this);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            try {
+                File file = fileChooser.getSelectedFile();
+
+                // Importar el valle desde el archivo
+                Valley.importar(file);
+
+                // Actualizar visualización
+                photo.repaint();
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Valle importado exitosamente",
+                        "Importación exitosa",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+
+            } catch (ValleyException e) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Error al importar:\n" + e.getMessage(),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
+        }
+    }
+
     private void ticTacButtonAction() {
         theValley.ticTac();
         photo.repaint();
@@ -139,7 +250,6 @@ class PhotoValley extends JPanel{
         setBackground(Color.white);
         setPreferredSize(new Dimension(gui.SIDE*gui.SIZE+10, gui.SIDE*gui.SIZE+10));         
     }
-
 
     public void paintComponent(Graphics g){
         Valley theValley=gui.getTheValley();
