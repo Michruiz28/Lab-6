@@ -101,5 +101,9 @@ public class Bear extends Mammal{
         
         return count;
     }
+    @Override
+    public String getTipoExportacion(){
+        return "Bear";
+    }
 
 }

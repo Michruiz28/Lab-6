@@ -121,17 +121,36 @@ public class Valley{
     public void abrir(File file) throws ValleyException{
         throw new ValleyException(ValleyException.OPCION_ABRIR_EN_CONSTRUCCION);
    }
-    public void salvar() throws ValleyException{
+    public void salvar(File file) throws ValleyException{
         throw new ValleyException(ValleyException.OPCION_GUARDAR_EN_CONSTRUCCION);
    }
-    public void importar() throws ValleyException{
+    public void importar(File file) throws ValleyException{
         throw new ValleyException(ValleyException.OPCION_IMPORTAR_EN_CONSTRUCCION);
    }
     public void exportar(File file) throws ValleyException{
-        throw new ValleyException(ValleyException.OPCION_EXPORTAR_EN_CONSTRUCCION);
-   }
+        try (PrintWriter writer = new PrintWriter (new FileWriter (file))){
+            for ( int r = 0; r < SIZE; r++){
+                for ( int c = 0; c<SIZE ; c++){
+                    Unit unidad = places [r][c];
+                    if(unidad != null){
+                        String tipo = unidad.getTipoExportacion();
+                        writer.println(tipo + "," + r + "," + c);
+                    }
+                }
+            }
+        } catch (IOException e ){
+            throw new ValleyException("Errpr al exportar : " + e.getMessage());
+        }
+    }
     public void nuevo() throws ValleyException{
         throw new ValleyException(ValleyException.OPCION_NUEVO_EN_CONSTRUCCION);
+    }
+    public void importar00(File file) throws ValleyException {
+        throw new ValleyException(ValleyException.OPCION_IMPORTAR_EN_CONSTRUCCION);
+    }
+
+    public void exportar00(File file) throws ValleyException {
+        throw new ValleyException(ValleyException.OPCION_EXPORTAR_EN_CONSTRUCCION);
     }
 
 }

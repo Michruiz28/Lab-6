@@ -86,5 +86,8 @@ public class Rock implements Unit {
     public int getColumn() {
         return column;
     }
-    
+    @Override
+    public String getTipoExportacion(){
+        return "Rock";
+    }
 }

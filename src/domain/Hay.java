@@ -61,4 +61,8 @@ public class Hay implements Unit{
     public boolean isAnimal(){
         return false;
     }
+    @Override
+    public String getTipoExportacion(){
+        return "Hay";
+    }
 }
