@@ -148,6 +148,7 @@ public class ValleyGUI extends JFrame{
             }
             try {
                 theValley.exportar00(selectedFile);
+
                 JOptionPane.showMessageDialog(this, "Valley exportado","Exportar",JOptionPane.INFORMATION_MESSAGE);
             } catch (ValleyException e){
                 JOptionPane.showMessageDialog(this, e.getMessage(),"Error al exportat",JOptionPane.ERROR_MESSAGE);

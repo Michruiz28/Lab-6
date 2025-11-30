@@ -1,4 +1,17 @@
 package domain;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+import java.io.File;
+<<<<<<< HEAD
+import java.io.Serializable;
+=======
+>>>>>>> 08ef52b (Controlador completado)
+=======
+import java.io.*;
+>>>>>>> 7f67065 (Guardar ready)
+import java.awt.Color;
+>>>>>>> Mich
 import java.io.*;
 import java.awt.Color;
 
@@ -7,7 +20,15 @@ import java.awt.Color;
  * Es una cuadricula bidimencional de un tamaño fijo donde habitan animales y recursos
  * La cuadricula es de 25x25 celdas
  */
+<<<<<<< HEAD
 public class Valley implements Serializable{
+=======
+<<<<<<< HEAD
+public class Valley implements Serializable {
+=======
+public class Valley implements Serializable{
+>>>>>>> 7f67065 (Guardar ready)
+>>>>>>> Mich
     static private int SIZE=25;
     private Unit[][] places;
     private Color lastHayColor;
@@ -117,6 +138,7 @@ public class Valley implements Serializable{
         }
     }
     
+<<<<<<< HEAD
     public void abrir00(File selectedFile) throws ValleyException{
         throw new ValleyException(ValleyException.OPCION_ABRIR_EN_CONSTRUCCION);
    }
@@ -127,6 +149,26 @@ public class Valley implements Serializable{
     }
 
     public void exportar00(File file) throws ValleyException{
+=======
+<<<<<<< HEAD
+    public void abrir(File file) throws ValleyException{
+        throw new ValleyException(ValleyException.OPCION_ABRIR_EN_CONSTRUCCION);
+   }
+<<<<<<< HEAD
+    public void salvar(File file) throws ValleyException{
+        throw new ValleyException(ValleyException.OPCION_GUARDAR_EN_CONSTRUCCION);
+   }
+    public void importar(File file) throws ValleyException{
+=======
+    public void guardar(File archivo) throws ValleyException{
+        throw new ValleyException(ValleyException.OPCION_GUARDAR_EN_CONSTRUCCION);
+   }
+    public static void importar(File archivo) throws ValleyException{
+>>>>>>> 491cf12 (new, save and import)
+        throw new ValleyException(ValleyException.OPCION_IMPORTAR_EN_CONSTRUCCION);
+   }
+    public void exportar(File file) throws ValleyException{
+>>>>>>> Mich
         try (PrintWriter writer = new PrintWriter (new FileWriter (file))){
             for ( int r = 0; r < SIZE; r++){
                 for ( int c = 0; c<SIZE ; c++){
@@ -144,7 +186,79 @@ public class Valley implements Serializable{
     public void nuevo() throws ValleyException{
         throw new ValleyException(ValleyException.OPCION_NUEVO_EN_CONSTRUCCION);
     }
+    public void importar00(File file) throws ValleyException {
+        throw new ValleyException(ValleyException.OPCION_IMPORTAR_EN_CONSTRUCCION);
+    }
 
+<<<<<<< HEAD
+=======
+    public void exportar00(File file) throws ValleyException {
+=======
+    public void abrir(File selectedFile) throws ValleyException{
+        throw new ValleyException(ValleyException.OPCION_ABRIR_EN_CONSTRUCCION);
+   }
+<<<<<<< HEAD
+    public void salvar(File file) throws ValleyException{
+        throw new ValleyException(ValleyException.OPCION_GUARDAR_EN_CONSTRUCCION);
+   }
+    public void importar(File file) throws ValleyException{
+        throw new ValleyException(ValleyException.OPCION_IMPORTAR_EN_CONSTRUCCION);
+   }
+<<<<<<< HEAD
+=======
+
+    public static void importar00(File file) throws ValleyException {
+        throw new ValleyException(ValleyException.OPCION_IMPORTAR_EN_CONSTRUCCION);
+    }
+>>>>>>> 7f67065 (Guardar ready)
+    public void exportar(File selectedFile) throws ValleyException{
+>>>>>>> 08ef52b (Controlador completado)
+        throw new ValleyException(ValleyException.OPCION_EXPORTAR_EN_CONSTRUCCION);
+<<<<<<< HEAD
+    }
+
+=======
+   }
+<<<<<<< HEAD
+   public void nuevo() throws ValleyException{
+        try {
+            throw new ValleyException(ValleyException.OPCION_NUEVO_EN_CONSTRUCCION);
+        } catch (ValleyException e) {
+            throw new RuntimeException(e);
+        }
+    }
+>>>>>>> 491cf12 (new, save and import)
+=======
+
+=======
+    public void exportar(File file) throws ValleyException{
+        try (PrintWriter writer = new PrintWriter (new FileWriter (file))){
+            for ( int r = 0; r < SIZE; r++){
+                for ( int c = 0; c<SIZE ; c++){
+                    Unit unidad = places [r][c];
+                    if(unidad != null){
+                        String tipo = unidad.getTipoExportacion();
+                        writer.println(tipo + "," + r + "," + c);
+                    }
+                }
+            }
+        } catch (IOException e ){
+            throw new ValleyException("Errpr al exportar : " + e.getMessage());
+        }
+    }
+>>>>>>> 7a6c2b5 (Exportar terminado)
+    public void nuevo() throws ValleyException{
+        throw new ValleyException(ValleyException.OPCION_NUEVO_EN_CONSTRUCCION);
+    }
+    public void importar00(File file) throws ValleyException {
+        throw new ValleyException(ValleyException.OPCION_IMPORTAR_EN_CONSTRUCCION);
+    }
+
+    public void exportar00(File file) throws ValleyException {
+        throw new ValleyException(ValleyException.OPCION_EXPORTAR_EN_CONSTRUCCION);
+    }
+
+>>>>>>> Mich
     public void guardar00(File file) throws ValleyException {
         try (FileOutputStream fileOut = new FileOutputStream(file);
              ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
@@ -157,6 +271,10 @@ public class Valley implements Serializable{
             throw new ValleyException("Error al guardar la partida: " + e.toString());
         }
     }
+<<<<<<< HEAD
+=======
+>>>>>>> 08ef52b (Controlador completado)
+>>>>>>> Mich
 }
 
 
