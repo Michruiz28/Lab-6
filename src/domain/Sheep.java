@@ -99,4 +99,9 @@ public class Sheep extends Mammal implements Serializable {
     public boolean isMovingNorth() {
         return movingNorth;
     }
+    @Override
+    public String getTipoExportacion(){
+        return "Sheep";
+    }
+
 }

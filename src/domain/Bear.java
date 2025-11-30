@@ -103,5 +103,9 @@ public class Bear extends Mammal implements Serializable {
         
         return count;
     }
+    @Override
+    public String getTipoExportacion(){
+        return "Bear";
+    }
 
 }

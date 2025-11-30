@@ -26,6 +26,8 @@ public interface Unit{
   
   public default boolean isAnimal(){
       return false;
-  }    
+  } 
+  
+  public String getTipoExportacion();  
      
 }

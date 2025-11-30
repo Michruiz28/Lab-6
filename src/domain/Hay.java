@@ -62,4 +62,8 @@ public class Hay implements Unit, Serializable{
     public boolean isAnimal(){
         return false;
     }
+    @Override
+    public String getTipoExportacion(){
+        return "Hay";
+    }
 }

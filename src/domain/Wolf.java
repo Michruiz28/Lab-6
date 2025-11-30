@@ -23,4 +23,9 @@ public class Wolf extends Mammal implements Serializable {
            }    
         }
     }
+
+    @Override
+    public String getTipoExportacion(){
+        return "Wolf";
+    }
 }
